@@ -18,7 +18,7 @@ CREATE TABLE "onRampTransaction" (
     "token" TEXT NOT NULL,
     "provider" TEXT NOT NULL,
     "amount" INTEGER NOT NULL,
-    "StartTime" TIMESTAMP(3) NOT NULL,
+    "startTime" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
 
     CONSTRAINT "onRampTransaction_pkey" PRIMARY KEY ("id")
@@ -27,9 +27,9 @@ CREATE TABLE "onRampTransaction" (
 -- CreateTable
 CREATE TABLE "Balance" (
     "id" SERIAL NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "amount" TEXT NOT NULL,
+    "amount" INTEGER NOT NULL,
     "locked" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "Balance_pkey" PRIMARY KEY ("id")
 );

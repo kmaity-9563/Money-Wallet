@@ -6,9 +6,10 @@ import db from '@repo/prisma/client'
 
 export const createTransaction = async (amount: number, provider: string) => {
     const session = await getServerSession(authOptions)
-    const token : any = Math.random()
-    const userId = await session.userId
-    console.log(`createTransaction`)
+    const token : String = Math.random().toString()
+    console.log("session", session)
+    const userId =  Number(session.user.id)
+    console.log(`userId: ${userId}`)
     if (!userId) {
         return {
             message: 'please login to create'
@@ -23,11 +24,9 @@ export const createTransaction = async (amount: number, provider: string) => {
             startTime : new Date,
             token : token ,
         }
-        
-    }),
+    });
 
-    console.log(db.onRampTransaction.fields.amount)
-    return {
+         return {
         message : 'created transaction'
        
     }

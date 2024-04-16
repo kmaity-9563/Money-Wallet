@@ -36,13 +36,14 @@ const authOptions = {
         try {
           const user = await db.user.create({
             data: {
+              // userId : Number(user.id),
               number: credentials.number,
               password: hashedPassword
             }
           });
           console.log(`User creating ${user}`);
           return {
-            id: user.id.toString(),
+            id: +user.id,
             number: user.number,
           };
         } catch (e) {

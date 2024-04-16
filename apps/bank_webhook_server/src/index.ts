@@ -1,9 +1,10 @@
 import express from 'express';
 import db from '@repo/prisma/client';
-
 const app = express();
+app.use(express.json())
 
 app.post('/axisbank', async (req, res) => {
+    console.log('request', req.body)
     const TransInformation = {
         token: req.body.token,
         userId: req.body.id,
@@ -11,10 +12,12 @@ app.post('/axisbank', async (req, res) => {
     };
 
     try {
+        console.log('TransInformation.userId', TransInformation.userId)
+        console.log('TransInformation.userId', TransInformation.token)
         await db.$transaction([
             db.balance.update({
                 where: {
-                    userId: TransInformation.userId
+                    userId: TransInformation.userId,
                 },
                 data: {
                     amount: {
@@ -24,7 +27,8 @@ app.post('/axisbank', async (req, res) => {
             }),
             db.onRampTransaction.update({
                 where: {
-                    userId: TransInformation.userId
+                    userId: TransInformation.userId,
+                    token: TransInformation.token
                 },
                 data: {
                     status: "success"
@@ -43,4 +47,4 @@ app.post('/axisbank', async (req, res) => {
     }
 });
 
-export default app;
+app.listen(3003)
