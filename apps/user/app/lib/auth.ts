@@ -56,10 +56,10 @@ const authOptions = {
   // session callbacks
   secret: process.env.JWT_SECRET || "secret",
   callbacks: {
-    async session({ token, session }) {
-      session.user.id = token.sub;
-      return session;
-    }
+    async session({ token, session }: any) {
+      session.user.id = token.sub
+      return session
+  }
   }
 };
 
