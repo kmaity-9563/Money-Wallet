@@ -17,8 +17,8 @@ export const Appbar = ({
         return (
             <div className="flex border-b justify-between px-4 border-slate-400">
                 <div className="text-lg flex flex-col justify-center">Money Wallet</div>
-                <div  className="flex flex-col justify-center pt-2"
-                onClick={user ? onSignout : onSignin } >{user ? "logout" :" logino"}</div>
+                <button  className="flex flex-col justify-center pt-2"
+                onClick={user ? onSignout : onSignin } >{user ? "logout" :" logino"}</button>
             </div>
         )
 }
