@@ -19,8 +19,20 @@ model User {
   password            String 
   number              String              @unique
   name                String?
-  balance             Balance?             // One-to-one relation
-  onRampTransactions onRampTransaction[]  // One-to-many relation
+  balance             Balance?            
+  onRampTransactions onRampTransaction[] 
+  fromUser            p2ptransfer[]       @relation(name: "fromUserRelation")
+  toUser              p2ptransfer[]       @relation(name: "toUserRelation")
+}
+
+model p2ptransfer {
+  id              Int                @id @default(autoincrement()) 
+  amount          Int
+  timestamp       DateTime
+   from           Int      
+  fromAccount     User      @relation(name: "fromUserRelation", fields: [from], references: [id])
+  to              Int       
+  toAccount       User      @relation(name: "toUserRelation", fields: [to], references: [id])
 }
 
 model onRampTransaction {
@@ -30,7 +42,7 @@ model onRampTransaction {
   provider   String 
   amount     Int
   startTime  DateTime
-  userId     Int
+  userId     Int  
   user       User         @relation(fields: [userId], references: [id])
 }
 
@@ -38,7 +50,7 @@ model Balance {
   id        Int       @id @default(autoincrement()) 
   amount    Int
   locked    Int 
-  userId    Int     @unique
+  userId    Int      @unique
   user      User       @relation(fields: [userId], references: [id])
 }
 

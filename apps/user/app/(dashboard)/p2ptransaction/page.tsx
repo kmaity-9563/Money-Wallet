@@ -1,9 +1,9 @@
 import React from 'react'
-
+import { SendMoney } from "../../../components/SendMoney"
 const page = () => {
   return (
     <div>
-      p2p
+    <SendMoney/>
     </div>
   )
 }

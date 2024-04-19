@@ -6,7 +6,7 @@ import db from '@repo/prisma/client'
 
 export const createTransaction = async (amount: number, provider: string) => {
     const session = await getServerSession(authOptions)
-    const token : String = Math.random().toString()
+    const token : string = Math.random().toString()
     console.log("session", session)
     const userId =  Number(session.user.id)
     console.log(`userId: ${userId}`)
